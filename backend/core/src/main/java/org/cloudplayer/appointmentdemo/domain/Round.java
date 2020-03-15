@@ -1,16 +1,15 @@
+
 package org.cloudplayer.appointmentdemo.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Round {
-
 	private int id;
 	private String name;
 	private String begin;
 	private String end;
 	private boolean over;
-
 	private int total;
 
 	public Round() {
@@ -21,7 +20,7 @@ public class Round {
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -29,7 +28,7 @@ public class Round {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -37,7 +36,7 @@ public class Round {
 	}
 
 	public String getBegin() {
-		return begin;
+		return this.begin;
 	}
 
 	public void setBegin(String begin) {
@@ -45,7 +44,7 @@ public class Round {
 	}
 
 	public String getEnd() {
-		return end;
+		return this.end;
 	}
 
 	public void setEnd(String end) {
@@ -53,7 +52,7 @@ public class Round {
 	}
 
 	public boolean isOver() {
-		return over;
+		return this.over;
 	}
 
 	public void setOver(boolean over) {
@@ -61,7 +60,7 @@ public class Round {
 	}
 
 	public int getTotal() {
-		return total;
+		return this.total;
 	}
 
 	public void setTotal(int total) {

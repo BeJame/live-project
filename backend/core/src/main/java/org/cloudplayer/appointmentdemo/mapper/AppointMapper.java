@@ -1,22 +1,23 @@
+
 package org.cloudplayer.appointmentdemo.mapper;
 
-
-import org.apache.ibatis.annotations.*;
+import java.util.List;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.cloudplayer.appointmentdemo.domain.Appointment;
 import org.cloudplayer.appointmentdemo.domain.Round;
 import org.cloudplayer.appointmentdemo.domain.Success;
 
-import java.util.List;
-
-public interface AppointMapper  {
-
-
-	@Insert("INSERT INTO t_record(re_identify,re_name,re_phone,re_amount,re_serial,re_ap_id) " +
-			"VALUES(#{idNumber},#{name},#{phone},#{amount},#{serial},#{round})")
+public interface AppointMapper {
+	@Insert({"INSERT INTO t_record(re_identify,re_name,re_phone,re_amount,re_serial,re_ap_id) " +
+			"VALUES(#{idNumber},#{name},#{phone},#{amount},#{serial},#{round})"})
 	void insertRecord(Appointment appointment);
 
-
-	@Select("SELECT * FROM t_success WHERE su_serial=#{param1}")
+	@Select({"SELECT * FROM t_success WHERE su_serial=#{param1}"})
 	@Results(id = "successMapper", value = {
 			@Result(column = "su_identify", property = "id"),
 			@Result(column = "su_serial", property = "serial"),
@@ -24,11 +25,11 @@ public interface AppointMapper  {
 	})
 	Success findSuccessBySerial(String serial);
 
-	@Select("SELECT * FROM t_success WHERE su_identify=#{param1}")
-	@ResultMap(value = "successMapper")
+	@Select({"SELECT * FROM t_success WHERE su_identify=#{param1}"})
+	@ResultMap({"successMapper"})
 	List<Success> findSuccessByIdentify(String id);
 
-	@Select("SELECT * FROM t_appointment ORDER BY ap_id DESC LIMIT 1")
+	@Select({"SELECT * FROM t_appointment ORDER BY ap_id DESC LIMIT 1"})
 	@Results(id = "roundMapper", value = {
 			@Result(property = "id", column = "ap_id"),
 			@Result(property = "name", column = "ap_name"),
@@ -38,15 +39,13 @@ public interface AppointMapper  {
 	})
 	Round findLatestRound();
 
-	@Insert("INSERT INTO t_appointment(ap_name,ap_begin) " +
-			"VALUES(#{name},#{begin})")
+	@Insert({"INSERT INTO t_appointment(ap_name,ap_begin) VALUES(#{name},#{begin})"})
 	void insertNewRound(Round round);
 
-	@Update("UPDATE t_appointment SET ap_end=#{end}, ap_over=1 WHERE ap_id=#{id}")
+	@Update({"UPDATE t_appointment SET ap_end=#{end}, ap_over=1 WHERE ap_id=#{id}"})
 	void endRound(Round round);
 
-
-	@Select("SELECT * FROM t_record WHERE re_serial=#{param1}")
+	@Select({"SELECT * FROM t_record WHERE re_serial=#{param1}"})
 	@Results(id = "appointmentMapper", value = {
 			@Result(property = "round", column = "re_ap_id"),
 			@Result(property = "name", column = "re_name"),
@@ -57,16 +56,14 @@ public interface AppointMapper  {
 	})
 	Appointment findAppointmentBySerial(String serial);
 
-	@Select("SELECT * FROM t_record WHERE re_identify=#{param1} AND re_ap_id=#{param2}")
-	@ResultMap(value = "appointmentMapper")
+	@Select({"SELECT * FROM t_record WHERE re_identify=#{param1} AND re_ap_id=#{param2}"})
+	@ResultMap(value="appointmentMapper")
 	Appointment findAppointmentByIdentify(String identify, int round);
 
-	@Select("SELECT * FROM t_record WHERE re_ap_id=#{param1}")
+	@Select({"SELECT * FROM t_record WHERE re_ap_id=#{param1}"})
 	@ResultMap(value = "appointmentMapper")
 	List<Appointment> findAppointmentByRound(int round);
 
-
-	@Insert("INSERT INTO t_success(su_identify, su_serial, su_ap_id) " +
-			"VALUES(#{param1}, #{param2}, #{param3})")
+	@Insert({"INSERT INTO t_success(su_identify, su_serial, su_ap_id) VALUES(#{param1}, #{param2}, #{param3})"})
 	void insertSuccess(String id, String serial, int apId);
 }

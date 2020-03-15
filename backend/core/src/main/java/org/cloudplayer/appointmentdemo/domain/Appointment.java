@@ -1,22 +1,22 @@
+
 package org.cloudplayer.appointmentdemo.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Appointment {
-
-	private int round;  //轮次
-	private String name; //姓名
-
+	private int round;
+	private String name;
 	@JsonProperty("idNumber")
-	private String idNumber; //身份证
-	private String phone; // 电话
-	private int amount; //数量
-	private String serial; //序列号
+	private String idNumber;
+	private String phone;
+	private int amount;
+	private String serial;
 
+	public Appointment() {
+	}
 
 	public int getRound() {
-		return round;
+		return this.round;
 	}
 
 	public void setRound(int round) {
@@ -24,7 +24,7 @@ public class Appointment {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -32,7 +32,7 @@ public class Appointment {
 	}
 
 	public String getIdNumber() {
-		return idNumber;
+		return this.idNumber;
 	}
 
 	public void setIdNumber(String idNumber) {
@@ -40,7 +40,7 @@ public class Appointment {
 	}
 
 	public String getPhone() {
-		return phone;
+		return this.phone;
 	}
 
 	public void setPhone(String phone) {
@@ -48,7 +48,7 @@ public class Appointment {
 	}
 
 	public int getAmount() {
-		return amount;
+		return this.amount;
 	}
 
 	public void setAmount(int amount) {
@@ -56,7 +56,7 @@ public class Appointment {
 	}
 
 	public String getSerial() {
-		return serial;
+		return this.serial;
 	}
 
 	public void setSerial(String serial) {

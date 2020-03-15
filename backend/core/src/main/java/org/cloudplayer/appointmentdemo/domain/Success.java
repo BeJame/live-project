@@ -1,13 +1,16 @@
+
 package org.cloudplayer.appointmentdemo.domain;
 
 public class Success {
+	private String id;
+	private String serial;
+	private int round;
 
-	private String id; //身份证
-	private String serial; //序列号
-	private int round; //轮次
+	public Success() {
+	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {
@@ -15,7 +18,7 @@ public class Success {
 	}
 
 	public String getSerial() {
-		return serial;
+		return this.serial;
 	}
 
 	public void setSerial(String serial) {
@@ -23,7 +26,7 @@ public class Success {
 	}
 
 	public int getRound() {
-		return round;
+		return this.round;
 	}
 
 	public void setRound(int round) {
