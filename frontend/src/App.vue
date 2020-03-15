@@ -13,6 +13,7 @@ export default {
 <style>
 html, body {
   font-family: 'Microsoft YaHei';
+  height: 100%;
   /* height: 100vh; */
 }
 
