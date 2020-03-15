@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper">
     <h1 align="center">福大口罩预约系统</h1>
-    <div class="button">
-      <div class="box"><img src="../asserts/images/mask.png" slot="icon"><span class="text">我要预约</span></div>
+    <div class="button" @click="handleClickAppointment">
+      <div class="box"><img src="../assets/mask.png" slot="icon"><span class="text">我要预约</span></div>
     </div>
-    <div class="button">
-      <div class="box"><img src="../asserts/images/mask.png" slot="icon"><span class="text">我要查询</span></div>
+    <div class="button" @click="handleClickQuery">
+      <div class="box"><img src="../assets/mask.png" slot="icon"><span class="text">我要查询</span></div>
     </div>
     <div class="change">
-      <mt-button type="primary" size="normal">新建预约</mt-button>
-      <mt-button type="primary" size="normal">结束当前</mt-button>
+      <mt-button type="primary" size="normal" @click="handleClickNew">新建预约</mt-button>
+      <mt-button type="primary" size="normal" @click="handleClickStop">结束当前</mt-button>
     </div>
   </div>
 </template>
@@ -17,25 +17,50 @@
 <script>
 
 export default {
-  name: '',
-  components: {
-  }
+  name: 'home',
+  methods: {
+    handleClickAppointment() {
+      this.$router.push('/appointment')
+    },
+    handleClickQuery() {
+      this.$router.push('/query')
+    },
+    async handleClickNew() {
+      console.log(this.$api)
+      await this.$api.TEST_start()
+      this.$toast({
+        message: '操作成功',
+        iconClass: 'icon icon-success'
+      })
+    },
+    async handleClickStop() {
+      await this.$api.TEST_end()
+      this.$toast({
+        message: '操作成功',
+        iconClass: 'icon icon-success'
+      })
+    }
+  },
 }
 </script>
 
 <style>
   .wrapper{
-    background: url('../asserts/images/bg.png') no-repeat;
+    background: url('../assets/bg.png') no-repeat;
     background-size: cover;
     height: 100%;
     background-position: center center;
   }
   .button{
-    width:70%;
+    box-sizing: border-box;
+    width: 80%;
     height: 100px;
-    margin: 0 auto;
+    margin: -30px auto;
+    padding: 0 15px;
     background-color: white;
     margin-bottom: 100px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 1px #ddd;
   }
   img {
     width: 60px; 
@@ -46,8 +71,7 @@ export default {
   }
   h1{
     /* margin: 0 auto; */
-    padding-top: 100px;
-    margin-bottom: 100px;
+    padding: 80px 0;
     color:white;
   }
   .box {
@@ -57,8 +81,9 @@ export default {
   }
   .text {
     position: relative;
-    left: 100px; 
-    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    left: 100px;
+    font-weight: bold;
+    font-size: 18px;
   }
   .change{
     display: flex;

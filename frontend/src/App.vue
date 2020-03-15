@@ -17,12 +17,13 @@ html, body {
   /* height: 100vh; */
 }
 
-.el-container, header.el-header, .el-main {
+/* .el-container, header.el-header, .el-main {
   margin: 0;
   padding: 0;
-}
+} */
 
 #app {
-  height: 100%;
+  /* height: 100%; */
 }
+
 </style>
