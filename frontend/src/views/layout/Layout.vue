@@ -1,7 +1,7 @@
 <template>
   <div class="default-layout">
     <mt-header :fixed="true" :title="title">
-      <mt-button icon="more" slot="right"></mt-button>
+      <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
     <router-view></router-view>
   </div>

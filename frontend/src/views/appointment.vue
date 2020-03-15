@@ -3,13 +3,13 @@
     <div class="info-wrapper">
       <p class="info-line">本轮预约是第 {{ config.id }} 轮</p>
       <p class="info-line">本次预约时间：{{ config.begin }} - {{ config.end || '未设定' }}</p>
-      <p class="info-line">本次预约口罩数量：{{ config.totalAmount || '未设定' }}</p>
+      <p class="info-line">本次预约口罩数量：{{ config.totalAmount || '10000' }}</p>
     </div>
     <div class="form-wrapper">
       <form>
         <mt-field label="姓名" v-model="form.name"></mt-field>
-        <mt-field @blur="checkIdNumber" label="身份证" v-model="form.idNumber" :state="form.legal.idNumber ? '' : 'error'"></mt-field>
-        <mt-field @blur="checkPhone" label="手机号" v-model="form.phone" type="tel" :state="form.legal.phone ? '' : 'error'"></mt-field>
+        <mt-field @blur.native.capture="checkIdNumber" label="身份证" v-model="form.idNumber" :state="form.legal.idNumber ? '' : 'error'"></mt-field>
+        <mt-field @blur.native.capture="checkPhone" label="手机号" v-model="form.phone" type="tel" :state="form.legal.phone ? '' : 'error'"></mt-field>
         <mt-field label="数量" placeholder="每人最多3个" v-model="form.amount" type="number"></mt-field>
       </form>
     </div>
@@ -50,16 +50,12 @@ export default {
   },
   methods: {
     async checkPhone() {
-      const res = await this.$api.checkPhone(this.form.phone)
-      if (!res) {
-        this.form.legal.phone = false
-      }
+      const phoneRegexp = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
+      this.form.legal.phone = phoneRegexp.test(this.form.phone)
     },
     async checkIdNumber() {
-      const res = await this.$api.checkPhone(this.form.idNumber)
-      if (!res) {
-        this.form.legal.phone = false
-      }
+      const idNumberRegexp = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/
+      this.form.legal.idNumber = idNumberRegexp.test(this.form.idNumber)
     },
     async handleSubmit() {
       this.$indicator.open('提交中...')
@@ -73,21 +69,22 @@ export default {
         const res = await this.$api.makeAppointment(data)
         this.$messagebox({
           title: '预约成功',
-          message: '您的序列号为：' + res.serialNumber + '，请妥善保存',
-          confirmButtonText: '我已保存',
+          message: '您的序列号为 ' + res.serialNumber + ' 请妥善保存',
+          confirmButtonText: '我已截图',
           confirmButtonHighlight: true,
           showCancelButton: true,
-          cancelButtonText: '复制序列号',
+          cancelButtonText: '复制到剪切板',
           closeOnClickModal: false
         }).then(action => {
-          if (behavior === 'cancel') {
-            // 复制,then
+          if (action === 'cancel') {
+            this.copyToClipboard(res.serialNumber)
             this.$toast({
               message: '已拷贝到剪切板，请及时保存',
               position: 'bottom',
               duration: 2000
             })
-          } else if (behavior === 'confirm') {
+            this.$router.replace('/')
+          } else if (action === 'confirm') {
             this.$router.replace('/')
           }
         })
@@ -105,6 +102,19 @@ export default {
     },
     handleReturn() {
       this.$router.push('/')
+    },
+    copyToClipboard(text) {
+      let $el = document.createElement('input')
+      // $el.style.visibility = 'hidden' 此处不能display:none或这样
+      $el.style.opacity = 0
+      $el.value = text
+      $el.readOnly = true
+      document.body.append($el)
+      $el.select()
+      document.execCommand('Copy')
+      console.log('已复制 '+ text)
+      document.body.removeChild($el)
+      $el = null
     }
   },
   async created() {

@@ -19,8 +19,13 @@
 export default {
   name: 'home',
   methods: {
-    handleClickAppointment() {
-      this.$router.push('/appointment')
+    async handleClickAppointment() {
+      const res = await this.$api.checkCanAppointment()
+      if (res.status) {
+        this.$router.push('/appointment')
+      } else {
+        this.$messagebox.alert('目前不是开放预约时间！', '提示')
+      }
     },
     handleClickQuery() {
       this.$router.push('/query')
@@ -87,6 +92,7 @@ export default {
   }
   .change{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    margin-top: -30px;
   }
 </style>

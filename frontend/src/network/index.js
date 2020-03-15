@@ -5,21 +5,21 @@ class Api {
         return axios.get('/can_appointment')
     }
 
-    static checkPhone(phone) {
-        return axios.get('/check_phone', {
-            params: {
-                phone
-            }
-        })
-    }
+    // static checkPhone(phone) {
+    //     return axios.get('/check_phone', {
+    //         params: {
+    //             phone
+    //         }
+    //     })
+    // }
     
-    static checkIdNumber(idNumber) {
-        return axios.get('/check_phone', {
-            params: {
-                idNumber
-            }
-        })
-    }
+    // static checkIdNumber(idNumber) {
+    //     return axios.get('/check_phone', {
+    //         params: {
+    //             idNumber
+    //         }
+    //     })
+    // }
 
     static makeAppointment(data) {
         return axios.post('/appointment/create', data)

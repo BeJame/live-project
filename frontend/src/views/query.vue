@@ -15,8 +15,6 @@
 
 export default {
   name: 'query',
-  components: {
-  },
   data() {
     return {
       serialNumber: ''

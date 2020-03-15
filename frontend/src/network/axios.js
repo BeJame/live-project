@@ -43,7 +43,7 @@ instance.interceptors.response.use(
     if (res.data.code === 200) {
       return res.data.data
     } else {
-      alert(res.data.code + '错误')
+      alert(res.data.code + '错误\n说明：' + res.data.msg)
     }
   // }
   },
@@ -60,6 +60,7 @@ instance.interceptors.response.use(
     //     duration: '5000'
     //   })
     // }
+    alert(error.response.status + '错误\n信息：' + error.response.data.data.msg)
     return Promise.reject(error)
   }
 )

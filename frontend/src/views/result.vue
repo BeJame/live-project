@@ -8,11 +8,11 @@
     <div class="body">
       <p class="title">个人信息</p>
       <div class="info">
-        <p>预约编号：{{ 123 }}</p>
-        <p>姓名：{{ 123 }}</p>
-        <p>身份证：{{ 123 }}</p>
-        <p>手机号：{{ 123 }}</p>
-        <p>预约数量：{{ 123 }}</p>
+        <p>预约编号：{{ '123abc123' }}</p>
+        <p>姓名：{{ 'test' }}</p>
+        <p>身份证：{{ '350423199911111111' }}</p>
+        <p>手机号：{{ '13112345678' }}</p>
+        <p>预约数量：{{ 3 }}</p>
       </div>
     </div>
     <div class="bottom">
@@ -51,7 +51,7 @@ export default {
     this.info = this.$route.params
   },
   mounted() {
-    this.genQrCode(JSON.stringify(this.info))
+    this.genQrCode(JSON.stringify('3afe47da9891dbe01927f76a6ecea55b'))
   },
 }
 </script>
