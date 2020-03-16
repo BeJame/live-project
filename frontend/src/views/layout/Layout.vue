@@ -3,9 +3,7 @@
     <mt-header :fixed="true" :title="title">
       <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
-    <transition>
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -17,12 +15,13 @@ export default {
     title() {
       return this.$route.meta.title
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .default-layout {
+  width: 100%;
   padding-top: 40px;
 }
 

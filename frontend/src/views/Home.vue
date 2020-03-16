@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="page-home">
     <h1 align="center">福大口罩预约系统</h1>
     <div class="button" @click="handleClickAppointment">
       <div class="box"><img src="../assets/mask.png" slot="icon"><span class="text">我要预约</span></div>
@@ -48,7 +48,8 @@ export default {
 </script>
 
 <style scoped>
-  .wrapper{
+  .page-home{
+    width: 100%;
     background: url('../assets/bg.png') no-repeat;
     background-size: cover;
     height: 100%;
