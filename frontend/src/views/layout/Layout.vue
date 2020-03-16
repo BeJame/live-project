@@ -22,7 +22,7 @@ export default {
 <style scoped lang="scss">
 .default-layout {
   width: 100%;
-  padding-top: 40px;
+  padding: 40px 0;
 }
 
 </style>

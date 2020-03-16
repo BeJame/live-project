@@ -42,9 +42,10 @@ html, body {
 }
 
 #copyright {
-  position: absolute;
-  bottom: -10px;
+  position: fixed;
+  bottom: 0px;
   width: calc(100% - 16px);
+  background: #fff;
   font-size: 12px;
   text-align: center;
   opacity: .5;
