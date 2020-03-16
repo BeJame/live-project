@@ -58,8 +58,21 @@ export default {
       this.form.legal.idNumber = idNumberRegexp.test(this.form.idNumber)
     },
     async handleSubmit() {
+      const { name, idNumber, phone, amount } = this.form
+      // 不能为空
+      if (!(name || idNumber || phone || amount) || isNaN(amount)) {
+        this.$toast('请正确填写表单')
+        return
+      }
+      // 数量限制
+      if (amount > 3) {
+        this.$toast('预约口罩数量不能超过3个！')
+        return
+      }
+      // 暂时跳过idNumber, phone检查
       this.$indicator.open('提交中...')
       const data = {
+        round: this.config.id,
         name: this.form.name,
         idNumber: this.form.idNumber,
         phone: this.form.phone,
@@ -90,9 +103,9 @@ export default {
         })
       } catch {
         this.$toast({
-          message: '预约失败，网络错误',
+          message: '预约失败',
           position: 'bottom',
-          duration: 5000
+          duration: 3000
         });
       } finally {
         setTimeout(() => {

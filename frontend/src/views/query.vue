@@ -25,20 +25,21 @@ export default {
       this.$indicator.open('查询中...')
       try {
         const res = await this.$api.getAppointmentResult(this.serialNumber)
-        if (!res.isWinner) {
+        if (!res.round) {
           this.$messagebox.alert('很遗憾，您本轮没有中签', '预约结果')
           return
         }
         // setTimeout(() => {
           this.$indicator.close()
         // }, 0);
+        this.$messagebox.alert('恭喜您中签了！', '预约结果')
         this.$router.push({
           name: 'result',
-          params: res.info
+          params: res.round
         })
       } catch {
         this.$toast({
-          message: '网络错误，查询失败',
+          message: '查询失败',
           position: 'bottom',
           duration: 3000
         });

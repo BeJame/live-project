@@ -1,14 +1,14 @@
 <template>
   <div class="page-result">
     <div class="top">
-      <p class="title">凭证二维码</p>
+      <p class="title">凭证二维码 · 第{{ info.round }}轮</p>
       <!-- qr code -->
       <canvas id="qrcodeCanvas"></canvas>
     </div>
     <div class="body">
       <p class="title">个人信息</p>
       <div class="info">
-        <p>预约编号：{{ '123abc123' }}</p>
+        <p>预约编号：{{ info.serial }}</p>
         <p>姓名：{{ info.name }}</p>
         <p>身份证：{{ info.idNumber }}</p>
         <p>手机号：{{ info.phone }}</p>
@@ -29,7 +29,12 @@ export default {
   data() {
     return {
       info: {
-
+        round: 1,
+        name: '',
+        phone: '',
+        amount: 0,
+        serial: '',
+        idNumber: ''
       }
     }
   },
@@ -44,14 +49,14 @@ export default {
       })
     },
     handleReturnHome() {
-      this.$router.replace('/')
+      this.$router.push('/')
     }
   },
   created() {
     this.info = this.$route.params
   },
   mounted() {
-    this.genQrCode(JSON.stringify('3afe47da9891dbe01927f76a6ecea55b'))
+    this.genQrCode(this.info.serial)
   },
 }
 </script>

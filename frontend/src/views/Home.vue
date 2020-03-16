@@ -22,7 +22,7 @@ export default {
     async handleClickAppointment() {
       const res = await this.$api.checkCanAppointment()
       if (res.status) {
-        this.$router.push('/appointment')
+        this.$router.push(`/appointment?round=${res.round.id}`)
       } else {
         this.$messagebox.alert('目前不是开放预约时间！', '提示')
       }
@@ -34,15 +34,13 @@ export default {
       console.log(this.$api)
       await this.$api.TEST_start()
       this.$toast({
-        message: '操作成功',
-        iconClass: 'icon icon-success'
+        message: '√操作成功',
       })
     },
     async handleClickStop() {
       await this.$api.TEST_end()
       this.$toast({
-        message: '操作成功',
-        iconClass: 'icon icon-success'
+        message: '√操作成功',
       })
     }
   },
