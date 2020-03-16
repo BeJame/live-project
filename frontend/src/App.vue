@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <div id="copyright">
-      copyright&copy;2020 云玩家-软工实践11组
-      <br>
-      <b>本程序非真实上线，请悉知</b>
-    </div>
+    <transition>
+      <router-view></router-view>
+    </transition>
+      <div id="copyright">
+        copyright&copy;2020 云玩家-软工实践11组
+        <br>
+        <b>本程序非真实上线，请悉知</b>
+      </div>
   </div>
 </template>
 
@@ -23,8 +25,8 @@ html, body {
 
 #copyright {
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  bottom: -10px;
+  width: calc(100% - 16px);
   font-size: 12px;
   text-align: center;
   opacity: .5;

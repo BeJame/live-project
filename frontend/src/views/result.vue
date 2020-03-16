@@ -9,10 +9,10 @@
       <p class="title">个人信息</p>
       <div class="info">
         <p>预约编号：{{ '123abc123' }}</p>
-        <p>姓名：{{ 'test' }}</p>
-        <p>身份证：{{ '350423199911111111' }}</p>
-        <p>手机号：{{ '13112345678' }}</p>
-        <p>预约数量：{{ 3 }}</p>
+        <p>姓名：{{ info.name }}</p>
+        <p>身份证：{{ info.idNumber }}</p>
+        <p>手机号：{{ info.phone }}</p>
+        <p>预约数量：{{ info.amount }}</p>
       </div>
     </div>
     <div class="bottom">

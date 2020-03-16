@@ -3,7 +3,9 @@
     <mt-header :fixed="true" :title="title">
       <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
-    <router-view></router-view>
+    <transition>
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 

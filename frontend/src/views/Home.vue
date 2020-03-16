@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .wrapper{
     background: url('../assets/bg.png') no-repeat;
     background-size: cover;
@@ -75,7 +75,7 @@ export default {
     margin-top : -30px;
   }
   h1{
-    /* margin: 0 auto; */
+    margin: 0 auto;
     padding: 80px 0;
     color:white;
   }
